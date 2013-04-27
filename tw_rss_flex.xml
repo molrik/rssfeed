@@ -1,0 +1,349 @@
+<T3DataStructure>
+ <sheets>
+  <sDEF>
+  <ROOT>
+   <TCEforms>
+    <sheetTitle>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_general</sheetTitle>
+   </TCEforms>
+   <type>array</type>
+   <el>
+    <goforurl>
+     <TCEforms>
+      <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_url</label>
+      <config>
+       		<type>input</type>
+       		<size>30</size>
+      </config>
+     </TCEforms>
+    </goforurl>
+    <gomaxitems>
+     <TCEforms>
+      <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_maxitems</label>
+      <config>
+     		<type>input</type>
+     		<size>5</size>
+      </config>
+     </TCEforms>
+    </gomaxitems>
+    <itemSeps>
+     <TCEforms>
+      <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_itemseps</label>
+      <config>
+		<type>input</type>
+		<size>5</size>
+      </config>
+     </TCEforms>
+    </itemSeps>
+    <descSeps>
+     <TCEforms>
+      <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_descseps</label>
+      <config>
+      		<type>input</type>
+      		<size>5</size>
+      </config>
+     </TCEforms>
+    </descSeps>
+    <subdesc>
+     <TCEforms>
+      <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_subdesc</label>
+      <config>
+       		<type>input</type>
+       		<size>10</size>
+      </config>
+     </TCEforms>
+    </subdesc>
+    <charset>
+     <TCEforms>
+      <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_charset</label>
+       <config>
+       		<type>select</type>
+       		<items type="array">
+       		<numIndex index="0" type="array">
+       			<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_charset1</numIndex>
+       			<numIndex index="1">KEINE</numIndex>
+       		</numIndex>
+       		<numIndex index="1" type="array">
+       			<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_charset2</numIndex>
+       			<numIndex index="1">UTF8</numIndex>
+       		</numIndex>
+       		<numIndex index="2" type="array">
+       			<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_charset3</numIndex>
+       			<numIndex index="1">SJIS</numIndex>
+       		</numIndex>
+       		<numIndex index="3" type="array">
+       			<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_charset4</numIndex>
+       			<numIndex index="1">EUCJP</numIndex>
+       		</numIndex>
+       		<numIndex index="4" type="array">
+       			<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_charset6</numIndex>
+       			<numIndex index="1">ISO88591</numIndex>
+       		</numIndex>
+       		<numIndex index="5" type="array">
+       			<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_charset7</numIndex>
+       			<numIndex index="1">ISO88592</numIndex>
+       		</numIndex>
+       		<numIndex index="6" type="array">
+       			<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_charset8</numIndex>
+       			<numIndex index="1">ISO88593</numIndex>
+       		</numIndex>
+       		<numIndex index="7" type="array">
+       			<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_charset9</numIndex>
+       			<numIndex index="1">ISO88594</numIndex>
+       		</numIndex> 
+       		<numIndex index="8" type="array">
+       			<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_charset10</numIndex>
+       			<numIndex index="1">ISO88595</numIndex>
+       		</numIndex> 
+       		<numIndex index="9" type="array">
+       			<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_charset11</numIndex>
+       			<numIndex index="1">ISO88596</numIndex>
+       		</numIndex>
+       		<numIndex index="10" type="array">
+       			<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_charset12</numIndex>
+       			<numIndex index="1">ISO88597</numIndex>
+       		</numIndex> 
+       		<numIndex index="11" type="array">
+       			<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_charset13</numIndex>
+       			<numIndex index="1">ISO88598</numIndex>
+       		</numIndex>       		      		       		      		       		       		       		
+       		<numIndex index="12" type="array">
+       			<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_charset5</numIndex>
+       			<numIndex index="1">AUTO</numIndex>
+       		</numIndex>        		        		       		
+       		</items>
+       		<maxitems>1</maxitems>
+       		<size>1</size>
+      </config> 
+     </TCEforms>   
+    </charset>    
+    <linktarget>
+     <TCEforms>
+      <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_linktarget</label>
+       <config>
+       		<type>select</type>
+       		<items type="array">
+       		<numIndex index="0" type="array">
+       			<numIndex index="0"></numIndex>
+       			<numIndex index="1"></numIndex>
+       		</numIndex>
+       		<numIndex index="1" type="array">
+       			<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_link1</numIndex>
+       			<numIndex index="1">_self</numIndex>
+       		</numIndex>
+       		<numIndex index="2" type="array">
+       			<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_link2</numIndex>
+       			<numIndex index="1">_blank</numIndex>
+       		</numIndex>
+       		</items>
+       		<maxitems>1</maxitems>
+       		<size>1</size>
+      </config> 
+     </TCEforms>   
+    </linktarget>
+   </el>
+   </ROOT>
+  </sDEF>
+  <specificfeeds>
+   <ROOT>
+    <TCEforms>
+     <sheetTitle>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_species</sheetTitle>
+    </TCEforms>
+    <type>array</type>
+    <el>
+     <channeldesc>
+      <TCEforms>
+       <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_channeldesc</label>
+        <config>
+         	<type>select</type>
+         	<items type="array">
+         	<numIndex index="0" type="array">
+         		<numIndex index="0"></numIndex>
+         		<numIndex index="1"></numIndex>
+         	</numIndex>
+         	<numIndex index="1" type="array">
+         		<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_false</numIndex>
+         		<numIndex index="1">false</numIndex>
+         	</numIndex>
+         	<numIndex index="2" type="array">
+         		<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_true</numIndex>
+         		<numIndex index="1">true</numIndex>
+         	</numIndex>
+         	</items>
+       		<maxitems>1</maxitems>
+       		<size>1</size>
+        </config>
+      </TCEforms>
+     </channeldesc>
+     <itemdesc>
+      <TCEforms>
+       <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_itemdesc</label>
+        <config>
+         	<type>select</type>
+         	<items type="array">
+         	<numIndex index="0" type="array">
+         		<numIndex index="0"></numIndex>
+         		<numIndex index="1"></numIndex>
+         	</numIndex>
+         	<numIndex index="1" type="array">
+         		<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_item_false</numIndex>
+         		<numIndex index="1">false</numIndex>
+         	</numIndex>
+         	<numIndex index="2" type="array">
+         		<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_item_true</numIndex>
+         		<numIndex index="1">true</numIndex>
+         	</numIndex>
+         	</items>
+       		<maxitems>1</maxitems>
+       		<size>1</size>
+        </config>
+      </TCEforms>
+     </itemdesc>
+     <imagedesc>
+      <TCEforms>
+       <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_imagedesc</label>
+        <config>
+         	<type>select</type>
+         	<items type="array">
+         	<numIndex index="0" type="array">
+         		<numIndex index="0"></numIndex>
+         		<numIndex index="1"></numIndex>
+         	</numIndex>
+         	<numIndex index="1" type="array">
+         		<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_image_false</numIndex>
+         		<numIndex index="1">false</numIndex>
+         	</numIndex>
+         	<numIndex index="2" type="array">
+         		<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_image_true</numIndex>
+         		<numIndex index="1">true</numIndex>
+         	</numIndex>
+         	</items>
+       		<maxitems>1</maxitems>
+       		<size>1</size>
+        </config>
+      </TCEforms>
+     </imagedesc>
+     <textdesc>
+      <TCEforms>
+       <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_textdesc</label>
+        <config>
+         	<type>select</type>
+         	<items type="array">
+         	<numIndex index="0" type="array">
+         		<numIndex index="0"></numIndex>
+         		<numIndex index="1"></numIndex>
+         	</numIndex>
+         	<numIndex index="1" type="array">
+         		<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_text_false</numIndex>
+         		<numIndex index="1">false</numIndex>
+         	</numIndex>
+         	<numIndex index="2" type="array">
+         		<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_text_true</numIndex>
+         		<numIndex index="1">true</numIndex>
+         	</numIndex>
+         	</items>
+       		<maxitems>1</maxitems>
+       		<size>1</size>
+        </config>
+      </TCEforms>
+     </textdesc>
+     <titlehide>
+      <TCEforms>
+       <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_titlehide</label>
+        <config>
+         	<type>select</type>
+         	<items type="array">
+         	<numIndex index="0" type="array">
+         		<numIndex index="0"></numIndex>
+         		<numIndex index="1"></numIndex>
+         	</numIndex>
+         	<numIndex index="1" type="array">
+         		<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_titlehide_false</numIndex>
+         		<numIndex index="1">false</numIndex>
+         	</numIndex>
+         	<numIndex index="2" type="array">
+         		<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_titlehide_true</numIndex>
+         		<numIndex index="1">true</numIndex>
+         	</numIndex>
+         	</items>
+       		<maxitems>1</maxitems>
+       		<size>1</size>
+        </config>
+      </TCEforms>
+     </titlehide>  
+     <linkhide>
+      <TCEforms>
+       <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_linkhide</label>
+        <config>
+         	<type>select</type>
+         	<items type="array">
+         	<numIndex index="0" type="array">
+         		<numIndex index="0"></numIndex>
+         		<numIndex index="1"></numIndex>
+         	</numIndex>
+         	<numIndex index="1" type="array">
+         		<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_linkhide_false</numIndex>
+         		<numIndex index="1">false</numIndex>
+         	</numIndex>
+         	<numIndex index="2" type="array">
+         		<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_linkhide_true</numIndex>
+         		<numIndex index="1">true</numIndex>
+         	</numIndex>
+         	</items>
+       		<maxitems>1</maxitems>
+       		<size>1</size>
+        </config>
+      </TCEforms>
+     </linkhide>
+     <linkafter>
+      <TCEforms>
+       <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_linkafter</label>
+        <config>
+         	<type>select</type>
+         	<items type="array">
+         	<numIndex index="0" type="array">
+         		<numIndex index="0"></numIndex>
+         		<numIndex index="1"></numIndex>
+         	</numIndex>
+         	<numIndex index="1" type="array">
+         		<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_linkafter_false</numIndex>
+         		<numIndex index="1">false</numIndex>
+         	</numIndex>
+         	<numIndex index="2" type="array">
+         		<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_linkafter_true</numIndex>
+         		<numIndex index="1">true</numIndex>
+         	</numIndex>
+         	</items>
+       		<maxitems>1</maxitems>
+       		<size>1</size>
+        </config>
+      </TCEforms>
+     </linkafter>
+     <htmlent>
+      <TCEforms>
+       <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_htmlent</label>
+        <config>
+         	<type>select</type>
+         	<items type="array">
+         	<numIndex index="0" type="array">
+         		<numIndex index="0"></numIndex>
+         		<numIndex index="1"></numIndex>
+         	</numIndex>
+         	<numIndex index="1" type="array">
+         		<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_linkafter_false</numIndex>
+         		<numIndex index="1">false</numIndex>
+         	</numIndex>
+         	<numIndex index="2" type="array">
+         		<numIndex index="0">LLL:EXT:tw_rssfeeds/locallang.php:pi1_linkafter_true</numIndex>
+         		<numIndex index="1">true</numIndex>
+         	</numIndex>
+         	</items>
+       		<maxitems>1</maxitems>
+       		<size>1</size>
+        </config>
+      </TCEforms>
+     </htmlent>                  
+    </el>
+   </ROOT>
+  </specificfeeds>
+  </sheets>
+</T3DataStructure>

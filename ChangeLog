@@ -1,0 +1,42 @@
+(add new changes on top of this file)
+07-04-30 Thorsten Wüst <t.wuest@typo3-developer.de>
+
+	* Insert charset option. Change charset if you need it. config.renderCharset = UTF-8 is highley recommended.
+
+07-04-26 Thorsten Wüst <t.wuest@typo3-developer.de>
+
+	* Delete $GLOBALS["TSFE"]->set_no_cache() from source code - some problems with indexing ;)
+	* Edit caching control var $pi_USER_INT_obj = TRUE;
+	* Check Tags for correct XHTML Code - Thanks to Arne Holzenburg
+
+06-04-26 Thorsten Wüst <t.wuest@wuest-media.de>
+
+	* Ability to disable the Feed name and Link
+	* HTML Support of RSS title and description information.
+	* Some corrections in the code
+	* using of extdeval for documentation
+	* right using of images! in the channel of cause!
+	* rename and change place of ext_typoscript_setup.txt to setup.txt in pi1/static - look at the static templates. youve just include  the tw rss feeds
+
+06-01-04 Thorsten Wüst <t.wuest@wuest-media.de>
+
+	* fix executing html the item description
+	* repair some erros selecting specific funtions
+	* samples on www.typo3-for-the.net/new
+
+05-12-30 Thorsten Wüst <t.wuest@wuest-media.de>
+
+	* fix executing html in head title
+	* start writing a documentation
+	* samples on www.typo3-for-the.net/new
+
+05-12-01 Thorsten Wüst <t.wuest@wuest-media.de>
+
+	* change layout from table to div - very nice :)
+	* testing with some rss content - all right!
+
+05-11-29 Thorsten Wüst  <t.wuest@wuest-media.de>
+
+	* Initial release
+	* Set FlexForms
+	* Writing parser
