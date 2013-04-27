@@ -2,7 +2,7 @@
 	/***************************************************************
 	*  Copyright notice
 	*
-	*  (c) 2007 Thorsten Wüst (t.wuest@wuest-media.de)
+	*  (c) 2007 Thorsten Wï¿½st (t.wuest@wuest-media.de)
 	*  All rights reserved
 	*
 	*  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,7 +24,7 @@
 	/**
 	* Plugin 'Tw Rss Feeds' for the 'tw_rssfeeds' extension.
 	*
-	* @author Thorsten Wüst <t.wuest@wuest-media.de>
+	* @author Thorsten Wï¿½st <t.wuest@wuest-media.de>
 	*/
 
 	require_once (PATH_t3lib . 'class.t3lib_xml.php');
@@ -229,12 +229,12 @@
 				$this->item_count = $get_themaxitems;
 			}
 
-			$content .= '<div id="twrss_table">';
+			$content .= '<div id="twrss_table" class="motwrss_holder">';
 
 			if ($get_the_title !== "true") {
 				$content .= '';
 			} else {
-				$content .= '<div class="twrss_head_channel">'.$this->data['CHANNEL']['TITLE'].'</div>';
+				$content .= '<div class="twrss_head_channel motwrss_head_channel">'.$this->data['CHANNEL']['TITLE'].'</div>';
 				$content .= $get_thedescsep;
 			}
 
@@ -249,7 +249,14 @@
 			if ($get_da_link_source !== "true") {
 				$content .= '';
 			} else {
-				$content .= '<div class="twrss_bodytext twrss_channel_link"><a href="'.$this->data['CHANNEL']['LINK'].'" target="'.$get_theLinkTarget.'">'.$this->data['CHANNEL']['LINK'].'</a></div>';
+			    $channellinkaddr = trim($this->data['CHANNEL']['LINK']); //full link
+			    $channellinktext = preg_replace("/^https?:\/\/(.+)$/i","\\1", $channellinkaddr); //remove http://
+			    $channellinktext = preg_replace("/\//","", $channellinktext); // remove /
+			    $channellinkatag = '<a href="'.$channellinkaddr.'" target="'.$get_theLinkTarget.'">'.$channellinktext.'</a>';  //adding atag
+			    $channellinkwrap = '<div class="twrss_bodytext twrss_channel_link motwrss_channel_link">'.$channellinkatag.'</div>'; // adding div-wrap
+				//$content .= '<div class="twrss_bodytext twrss_channel_link motwrss_channel_link"><a href="'.$this->data['CHANNEL']['LINK'].'" target="'.$get_theLinkTarget.'">';
+				$content .= $channellinkwrap;
+				//$content .= '</a></div>';
 				$content .= $get_thedescsep;
 			}
 
@@ -276,18 +283,29 @@
 			for ($i = 1; $i <= $this->item_count; $i++) {
 				$going = str_replace('<', '&lt;', $this->data['ITEM'][$i]['TITLE']);
 				$go_the_head = str_replace('>', '&gt;', $going);
-				$content .= '<div class="twrss_bodytext twrss_item_link"><a href="'.$this->data['ITEM'][$i]['LINK'].'" target="'.$get_theLinkTarget.'" >'.$go_the_head.'</a></div>';
+				$content .= '<div class="twrss_bodytext twrss_item_link motwrss_item_link"><a href="'.$this->data['ITEM'][$i]['LINK'].'" target="'.$get_theLinkTarget.'" >'.$go_the_head.'</a></div>';
 				$content .= $get_thedescsep;
 				if ($get_theItemDesc == "true" && isset($this->data['ITEM'][$i]['DESCRIPTION'])) {
-
+				    $itemdescrall = trim($this->data['ITEM'][$i]['DESCRIPTION']);  //alt indhold
+                    $itemimageandtext = preg_replace("/<br\/>/","", $itemdescrall); // remove <br/>
+                    $itemimageandtextarr = preg_split("/<p>/", $itemimageandtext); //image and text into array
+                    $itemimage = $itemimageandtextarr[0];   //image
+                    $itemtext = preg_replace("/<\/p>/","", $itemimageandtextarr[1]);    //remove </p>
 					if ($get_html_entities !== "true") {
-						$content .= '<div class="twrss_bodytext twrss_item_content">'.$this->data['ITEM'][$i]['DESCRIPTION'].'</div>';
-					} else {
-						$content .= '<div class="twrss_bodytext twrss_item_content">'.htmlentities($this->data['ITEM'][$i]['DESCRIPTION']).'</div>';
+						$content .= '<div class="twrss_bodytext twrss_item_content motwrss_item_content mofalse">'.$itemdescrall.'</div>';
+                        $content .= '<div class="twrss_bodytext motwrss_item_image">'.'image: '.$itemimage.'</div>';
+                        $content .= '<div class="twrss_bodytext motwrss_item_text">'.'text: '.$itemtext.'</div>';
+   					} else {
+						$content .= '<div class="twrss_bodytext twrss_item_content motwrss_item_content motrue">'.htmlentities($this->data['ITEM'][$i]['DESCRIPTION']).'</div>';
 					}
 
 					$content .= $get_thedescsep;
 				}
+                if (isset($this->data['ITEM'][$i]['PUBDATE'])) {
+                    $itemdateraw = $this->data['ITEM'][$i]['PUBDATE']; //get date
+                    $itemdateadj = $itemdateraw;
+                    $content .= '<div class="twrss_bodytext motwrss_item_pubdate">'.'date: '.$itemdateadj.'</div>';                    
+                }
 
 				$content .= $get_theItemSeparator;
 			}
@@ -434,7 +452,7 @@
 	 */
 		function xml_file($file) {
 			if (!($fp = @fopen($file, "r")))
-				$this->error("Kann XML-Datei <b>".$file."</b> nicht öffnen");
+				$this->error("Kann XML-Datei <b>".$file."</b> nicht ï¿½ffnen");
 
 			while ($data = fread($fp, 4096)) {
 				if (!(xml_parse($this->parser, $data)))
