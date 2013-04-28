@@ -2,7 +2,8 @@
 	/***************************************************************
 	*  Copyright notice
 	*
-	*  (c) 2007 Thorsten W�st (t.wuest@wuest-media.de)
+	*  Version 2.1 2007 Thorsten Wust (t.wuest@wuest-media.de)
+    *  Version 2.2 Modified 2013 by Mikkel Olrik (molrik@molrikdata.dk)
 	*  All rights reserved
 	*
 	*  This script is part of the TYPO3 project. The TYPO3 project is
@@ -49,6 +50,7 @@
 		var $input_flag = false;
 		var $channel_flag = false;
 		var $item_flag = false;
+        var $item_channel_link = '';
 
 		/**
 		 * [initialize the url the parser will be able to work]
@@ -63,7 +65,7 @@
 			$this->pi_loadLL();
 			$this->pi_initPIflexForm(); //init the flexes :)
 
-			#$GLOBALS["TSFE"]->set_no_cache();
+			$GLOBALS["TSFE"]->set_no_cache();    //temp while developing
 
 			$content = "";
 
@@ -76,7 +78,8 @@
 			$this->conf['charset'];
 
 			if ($get_url == "" && $this->conf['url'] == "") {
-				return"Es wurde keine URL eingegeben. Bitte machen Sie es so!"; //Mehrsprachig machen
+				//return "Es wurde keine URL eingegeben. Bitte machen Sie es so!"; //Mehrsprachig machen
+                return "Der er ikke angivet en URL. Gør venligst dette!"; //DK
 			}
 			
 			switch($get_char){
@@ -162,6 +165,10 @@
 		 * @param	string		$get_thedescsep: separator between content blocks
 		 */
 		function parseRSS($file) {
+		    
+            $moheader = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'moheader', 'sDEF');
+            $get_moheader = $moheader ? $moheader:
+            $this->conf['moheader'];            
 
 			$get_maxitems = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'gomaxitems', 'sDEF');
 			$get_themaxitems = $get_maxitems ? $get_maxitems:
@@ -183,13 +190,13 @@
 				$get_theLinkTarget = "_blank";
 			}
 
-			$SubmitValue = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'subdesc', 'sDEF');
+			/* $SubmitValue = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'subdesc', 'sDEF');
 			$get_theSubmitValue = $SubmitValue ? $SubmitValue:
 			$this->conf['SubmitValue'];
 
 			if ($SubmitValue == "" && $this->conf['SubmitValue'] == "") {
 				$get_theSubmitValue = "Submit";
-			}
+			} */
 
 			$ChannelDesc = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'channeldesc', 'specificfeeds');
 			$get_theChannelDesc = $ChannelDesc ? $ChannelDesc:
@@ -230,7 +237,13 @@
 			}
 
 			$content .= '<div id="twrss_table" class="motwrss_holder">';
+            
+            //moheader - den redigerbare overskrift
+            if (trim($get_moheader)<>'') {
+                $content .= '<h2 class="twrss_bodytext motw_header">'.$get_moheader.'</h2>';            
+            }
 
+            //channel header / hidden feedtitle
 			if ($get_the_title !== "true") {
 				$content .= '';
 			} else {
@@ -238,7 +251,7 @@
 				$content .= $get_thedescsep;
 			}
 
-
+            //channel description / Display channel description
 			if ($get_theChannelDesc !== "true") {
 				$content .= '';
 			} else {
@@ -246,22 +259,24 @@
 				$content .= $get_thedescsep;
 			}
 
+            //channel link / hidden feedlink
+            $channellinkaddr = trim($this->data['CHANNEL']['LINK']); //full link
+            $channellinktext = preg_replace("/^https?:\/\/(.+)$/i","\\1", $channellinkaddr); //remove http://
+            $channellinktext = preg_replace("/\//","", $channellinktext); // remove /
+            $channellinkatag = '<a href="'.$channellinkaddr.'" target="'.$get_theLinkTarget.'">'.$channellinktext.'</a>';  //adding atag
+            
 			if ($get_da_link_source !== "true") {
 				$content .= '';
 			} else {
-			    $channellinkaddr = trim($this->data['CHANNEL']['LINK']); //full link
-			    $channellinktext = preg_replace("/^https?:\/\/(.+)$/i","\\1", $channellinkaddr); //remove http://
-			    $channellinktext = preg_replace("/\//","", $channellinktext); // remove /
-			    $channellinkatag = '<a href="'.$channellinkaddr.'" target="'.$get_theLinkTarget.'">'.$channellinktext.'</a>';  //adding atag
 			    $channellinkwrap = '<div class="twrss_bodytext twrss_channel_link motwrss_channel_link">'.$channellinkatag.'</div>'; // adding div-wrap
 				//$content .= '<div class="twrss_bodytext twrss_channel_link motwrss_channel_link"><a href="'.$this->data['CHANNEL']['LINK'].'" target="'.$get_theLinkTarget.'">';
-				$content .= $channellinkwrap;
+				//$content .= $channellinkwrap; //don't show all here
 				//$content .= '</a></div>';
-				$content .= $get_thedescsep;
+				//$content .= $get_thedescsep;
 			}
 
-
-			if ($get_theImage == "true" && isset($this->data['IMAGE'])) {
+            //image / display image (image is in descr!)
+			/* if ($get_theImage == "true" && isset($this->data['IMAGE'])) {
 				$content .= '<div class="twrss_imagefile">';
 				$content .= '<a href="'.$this->data['IMAGE']['LINK'].'" target="'.$get_theLinkTarget.'">';
 				$content .= '<img src="'.$this->data['IMAGE']['URL'].'" alt="'.@$this->data['IMAGE']['TITLE'].'" border="0"';
@@ -272,7 +287,7 @@
 				$content .= ' />';
 				$content .= '</a>';
 				$content .= '</div>';
-			}
+			} */
 
 			if ($get_first_line_after_link !== "true") {
 				$content .= '';
@@ -281,10 +296,32 @@
 			}
 
 			for ($i = 1; $i <= $this->item_count; $i++) {
-				$going = str_replace('<', '&lt;', $this->data['ITEM'][$i]['TITLE']);
-				$go_the_head = str_replace('>', '&gt;', $going);
-				$content .= '<div class="twrss_bodytext twrss_item_link motwrss_item_link"><a href="'.$this->data['ITEM'][$i]['LINK'].'" target="'.$get_theLinkTarget.'" >'.$go_the_head.'</a></div>';
-				$content .= $get_thedescsep;
+			    
+               if (isset($this->data['ITEM'][$i]['PUBDATE'])) {
+                    $itemdateraw = $this->data['ITEM'][$i]['PUBDATE']; //get date from rss
+
+                    //$content .= 'time: '.time().' blogtime: '.date("d. m Y",strtotime($itemdateraw));   //test
+                    
+                    $itemdatetimestamp = strtotime($itemdateraw);   //convert to timestamp
+                    $itemday = date("d",$itemdatetimestamp);    //extract day
+                    $itemmonth = date("n",$itemdatetimestamp);  //extract month without zeros
+                    $danishmonths = array('zero','januar','februar','marts','april','maj','juni','juli','august','september','oktober','november','december');  //danske måneder
+                    $itemmonthdk = $danishmonths[intval($itemmonth)];   //udtræk dansk måned
+                    $itemyear = date("Y",$itemdatetimestamp);  //extract full year
+                    $itemdateadj = $itemday.'. '.$itemmonthdk.' '.$itemyear;    //sammensæt dato på dansk
+                    
+                    //$content .= '<div class="twrss_bodytext motwrss_item_pubdate">'.'dato: '.$itemdateadj.'</div>';                    
+                }
+                
+                
+				//$going = str_replace('<', '&lt;', $this->data['ITEM'][$i]['TITLE']);
+				//$go_the_head = str_replace('>', '&gt;', $going);
+				//$content .= '<div class="twrss_bodytext twrss_item_link motwrss_item_link"><a href="'.$this->data['ITEM'][$i]['LINK'].'" target="'.$get_theLinkTarget.'" >'.$go_the_head.'</a></div>';
+				//$content .= $get_thedescsep;
+				$moitemlinkbegin = '<a href="'.$this->data['ITEM'][$i]['LINK'].'" target="'.$get_theLinkTarget.'" >';
+                $moitemlinkend = '</a>';
+                //$content .= $moitemlinkbegin.'Testlink'.$moitemlinkend;
+                
 				if ($get_theItemDesc == "true" && isset($this->data['ITEM'][$i]['DESCRIPTION'])) {
 				    $itemdescrall = trim($this->data['ITEM'][$i]['DESCRIPTION']);  //alt indhold
                     $itemimageandtext = preg_replace("/<br\/>/","", $itemdescrall); // remove <br/>
@@ -292,26 +329,29 @@
                     $itemimage = $itemimageandtextarr[0];   //image
                     $itemtext = preg_replace("/<\/p>/","", $itemimageandtextarr[1]);    //remove </p>
 					if ($get_html_entities !== "true") {
-						$content .= '<div class="twrss_bodytext twrss_item_content motwrss_item_content mofalse">'.$itemdescrall.'</div>';
-                        $content .= '<div class="twrss_bodytext motwrss_item_image">'.'image: '.$itemimage.'</div>';
-                        $content .= '<div class="twrss_bodytext motwrss_item_text">'.'text: '.$itemtext.'</div>';
+						//$content .= '<div class="twrss_bodytext twrss_item_content motwrss_item_content mofalse">'.$itemdescrall.'</div>'; //do not show it all
+                        $content .= '<div class="twrss_bodytext motwrss_item_image">'.$moitemlinkbegin.$itemimage.$moitemlinkend.'</div>';  //showing the image
+                        $content .= '<div class="twrss_bodytext motwrss_item_footer">';  //showing the footer begin
+                        $content .= '<div class="motwrss_item_footer_black">';  //showing the footer black bar begin
+                        $content .= '<span class="motwrss_item_date">'.$itemdateadj.'</span>';
+                        $content .= ' - fra bloggen ';
+                        $content .= $channellinkatag;
+                        $content .= '</div>';  //showing the footer black bar end                                                                       
+                        $content .= '<div class="twrss_bodytext motwrss_item_text motwrss_item_footer_white">'.$itemtext.'</div>';    //item text
+                        $content .= '</div>';  //showing the footer end
+                         
    					} else {
 						$content .= '<div class="twrss_bodytext twrss_item_content motwrss_item_content motrue">'.htmlentities($this->data['ITEM'][$i]['DESCRIPTION']).'</div>';
 					}
 
 					$content .= $get_thedescsep;
 				}
-                if (isset($this->data['ITEM'][$i]['PUBDATE'])) {
-                    $itemdateraw = $this->data['ITEM'][$i]['PUBDATE']; //get date
-                    $itemdateadj = $itemdateraw;
-                    $content .= '<div class="twrss_bodytext motwrss_item_pubdate">'.'date: '.$itemdateadj.'</div>';                    
-                }
 
 				$content .= $get_theItemSeparator;
 			}
 
 
-			if ($get_theTextinput == "true" && isset($this->data['TEXTINPUT'])) {
+			/* if ($get_theTextinput == "true" && isset($this->data['TEXTINPUT'])) {
 				$content .= '<div class="twrss_bodytext twrss_input_title">'.$this->data['TEXTINPUT']['TITLE'].'</div>';
 				$content .= $get_thedescsep;
 				$content .= '<div class="twrss_bodytext twrss_input_description">'.$this->data['TEXTINPUT']['DESCRIPTION'].'</div>';
@@ -321,7 +361,8 @@
 				$content .= '<input type="submit" class="twrss_bodytext twrss_input_submit" value="'.$get_theSubmitValue.'" />';
 				$content .= '</form>';
 				$content .= $get_theItemSeparator;
-			}
+			} */
+            
 			$content .= '</div>';
 			return $content;
 		}

@@ -7,6 +7,15 @@
    </TCEforms>
    <type>array</type>
    <el>
+    <moheader>
+     <TCEforms>
+      <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_head</label>
+      <config>
+       		<type>input</type>
+       		<size>30</size>
+      </config>
+     </TCEforms>
+    </moheader>
     <goforurl>
      <TCEforms>
       <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_url</label>
@@ -43,15 +52,6 @@
       </config>
      </TCEforms>
     </descSeps>
-    <subdesc>
-     <TCEforms>
-      <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_subdesc</label>
-      <config>
-       		<type>input</type>
-       		<size>10</size>
-      </config>
-     </TCEforms>
-    </subdesc>
     <charset>
      <TCEforms>
       <label>LLL:EXT:tw_rssfeeds/locallang.php:pi1_sheet_charset</label>
