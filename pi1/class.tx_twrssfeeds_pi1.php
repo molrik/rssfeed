@@ -65,7 +65,7 @@
 			$this->pi_loadLL();
 			$this->pi_initPIflexForm(); //init the flexes :)
 
-			$GLOBALS["TSFE"]->set_no_cache();    //temp while developing
+			//$GLOBALS["TSFE"]->set_no_cache();    //temp while developing
 
 			$content = "";
 
