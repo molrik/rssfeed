@@ -16,6 +16,8 @@ TitleFile =
 LinkDau =
 LinkAfter =
 HTMLEnt =
+columnWidth = {$motwrss.columnWidth}
+morePicsOnBlog = {$motwrss.morepicsonblog}
 
 _CSS_DEFAULT_STYLE ( 
 

@@ -1,5 +1,9 @@
 (add new changes on top of this file)
 
+13-06-12 Mikkel Olrik <molrik@molrikdata.dk>
+
+	* 2.2.3 Modifications for WhatWeDo - video iframe resizing, image-and-text splitting and rearranging m.m.
+
 13-04-29 Mikkel Olrik <molrik@molrikdata.dk>
 
 	* 2.2.2 Modifications for WhatWeDo - activating cache

@@ -324,13 +324,79 @@
                 
 				if ($get_theItemDesc == "true" && isset($this->data['ITEM'][$i]['DESCRIPTION'])) {
 				    $itemdescrall = trim($this->data['ITEM'][$i]['DESCRIPTION']);  //alt indhold
-                    $itemimageandtext = preg_replace("/<br\/>/","", $itemdescrall); // remove <br/>
+                    $itemimageandtext = preg_replace("/\<br(\s*)?\/?\>/i","", $itemdescrall); // remove <br/> and <br />
+                    //$itemimageandtext = preg_replace("/<br\/>/","", $itemdescrall); //old version
+                    //$itemimageandtext = $itemdescrall;
                     $itemimageandtextarr = preg_split("/<p>/", $itemimageandtext); //image and text into array
-                    $itemimage = $itemimageandtextarr[0];   //image
-                    $itemtext = preg_replace("/<\/p>/","", $itemimageandtextarr[1]);    //remove </p>
+                    $itemimage = $itemimageandtextarr[0];   //images
+                    $itemtext = '<p>'.substr($itemimageandtext, strpos($itemimageandtext, '<p>'));
+                    /* debug 
+                        $content .= '<div class="twrss_bodytext motwrss_item_content">'.
+                        ' itemtext:'.$itemtext.
+                        '</div>';
+                         */
+                    
+                    $pos = strpos(strtolower($itemimage),'<iframe');    //position af evt. iframe med video 
+                    if($pos === false) {
+                        // string needle NOT found in haystack
+                    } else {
+                        // string needle found in haystack - så skal bredden ændres
+                        $wpos = strpos(strtolower($itemimage),'width'); //hvor starter bredden
+                        $hpos = strpos(strtolower($itemimage),'height'); //hvor starter højden
+                        $srcpos = strpos(strtolower($itemimage),'src'); //hvor starter kilden
+                        $wbegin = $wpos + 7; //width begin
+                        $wend = $hpos - 2; //width end
+                        $worg = intval(substr($itemimage, $wbegin, (intval($wend)-intval($wbegin))));   //extract width
+                        $hbegin = $hpos + 8; //height begin
+                        $hend = $srcpos - 2; //height end
+                        $horg = intval(substr($itemimage, $hbegin, (intval($hend)-intval($hbegin))));   //extract height
+                        $wadj = intval($this->conf['columnWidth']); //get value from ts setup
+                        $hadj = round($horg * ($wadj / $worg)); //compute relative height
+                        /* debug
+                        $content .= '<div class="twrss_bodytext motwrss_item_content">'.
+                        'IFRAME FOUND'.
+                        ' wpos:'.$wpos.' hpos:'.$hpos.' scrpos:'.$srcpos.'<br />'.
+                        ' w:'.$worg.
+                        ' h:'.$horg.
+                        ' wa:'.$wadj.
+                        ' ha:'.$hadj.
+                        '</div>';
+                         */
+                        $itemiframemodw = substr_replace($itemimage, $wadj, $wbegin, (intval($wend)-intval($wbegin)));  //replace width
+                        $itemiframemodh = substr_replace($itemiframemodw, $hadj, $hbegin, (intval($hend)-intval($hbegin))); //replace height
+                        $itemimage = $itemiframemodh;  //updating the iframe with the new dimensions
+                     
+                    }        
+                    $imgcount = substr_count($itemimage, '<img');
+                    if ($imgcount) { //hvis billeder overhovedet
+                       $imagesarr = preg_split("/<img/", $itemimage);   //splitting images
+                       $imageandtxtarr = preg_split("/>/", $imagesarr[1]);   //splitting image and text
+                       $singleimage = '<span class="mo_img" title="'.htmlentities(trim($imageandtxtarr[1])).'">'.'<img'.$imageandtxtarr[0].'></span>'; //reinforce imgtag
+                       $singletxt = '<span class="mo_imgtxt">'.htmlentities(trim($imageandtxtarr[1])).'</span>';  //text in span
+                       $itemimage = $singleimage.$singletxt;
+                    }
+                    /* debug  
+                    $content .= '<div class="twrss_bodytext motwrss_item_content">'.
+                    'Images found: '.$imgcount.'<br />'.                    
+                    ' img: '.$imageandtxtarr[0].                    
+                    ' txt: '.$imageandtxtarr[1].                    
+                    '</div>';*/
+                    
+                    $morepicsonbloglink = trim($this->conf['morePicsOnBlog']); //get value from ts setup
+                    
 					if ($get_html_entities !== "true") {
 						//$content .= '<div class="twrss_bodytext twrss_item_content motwrss_item_content mofalse">'.$itemdescrall.'</div>'; //do not show it all
+                        $content .= '<div class="twrss_bodytext motwrss_item_textholder">';  //showing the textholder begin
+                        $content .= '<div class="motwrss_item_text_black">';  //showing the text black bar begin
+                        $content .= '<span class="motwrss_item_date">'.$itemdateadj.'</span>';
+                        $content .= ' - fra bloggen ';
+                        $content .= $channellinkatag;
+                        $content .= '</div>';  //showing the text black bar end                                                                       
+                        $content .= '<div class="twrss_bodytext motwrss_item_text motwrss_item_text_white">'.$itemtext.'</div>';    //item text
+                        $content .= '</div>';  //showing the text end
+                        $content .= '<div class="twrss_bodytext motwrss_item_image_header">'.$moitemlinkbegin.$morepicsonbloglink.$moitemlinkend.'</div>';  //showing the image header
                         $content .= '<div class="twrss_bodytext motwrss_item_image">'.$moitemlinkbegin.$itemimage.$moitemlinkend.'</div>';  //showing the image
+                        /*
                         $content .= '<div class="twrss_bodytext motwrss_item_footer">';  //showing the footer begin
                         $content .= '<div class="motwrss_item_footer_black">';  //showing the footer black bar begin
                         $content .= '<span class="motwrss_item_date">'.$itemdateadj.'</span>';
@@ -339,7 +405,8 @@
                         $content .= '</div>';  //showing the footer black bar end                                                                       
                         $content .= '<div class="twrss_bodytext motwrss_item_text motwrss_item_footer_white">'.$itemtext.'</div>';    //item text
                         $content .= '</div>';  //showing the footer end
-                         
+                        */
+                                                                         
    					} else {
 						$content .= '<div class="twrss_bodytext twrss_item_content motwrss_item_content motrue">'.htmlentities($this->data['ITEM'][$i]['DESCRIPTION']).'</div>';
 					}

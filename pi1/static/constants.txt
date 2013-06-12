@@ -1,0 +1,6 @@
+# cat=morss-settings/iframe/01; type=int+; label= Column width
+motwrss.columnWidth = 400
+
+# cat=morss-settings/iframe/11; type=string; label= More pics link text
+motwrss.morepicsonblog = &gt;&gt; Se flere billeder på bloggen...
+
