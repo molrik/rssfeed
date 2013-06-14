@@ -1,4 +1,7 @@
 (add new changes on top of this file)
+13-06-14 Mikkel Olrik <molrik@molrikdata.dk>
+
+	* 2.2.4 pi1-bugfixing: http://stackoverflow.com/questions/4665782/call-time-pass-by-reference-has-been-deprecated - Removed & from &$this line 580 i pi1
 
 13-06-12 Mikkel Olrik <molrik@molrikdata.dk>
 
