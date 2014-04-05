@@ -327,9 +327,14 @@
                     $itemimageandtext = preg_replace("/\<br(\s*)?\/?\>/i","", $itemdescrall); // remove <br/> and <br />
                     //$itemimageandtext = preg_replace("/<br\/>/","", $itemdescrall); //old version
                     //$itemimageandtext = $itemdescrall;
-                    $itemimageandtextarr = preg_split("/<p/", $itemimageandtext); //image and text into array
-                    $itemimage = $itemimageandtextarr[0];   //images
-                    $itemtext = '<span class="item_text_holder">'.substr($itemimageandtext, strpos($itemimageandtext, '<p')).'</span>';
+                    if (preg_match("/<p/", $itemimageandtext)) {    //if text-descr
+                        $itemimageandtextarr = preg_split("/<p/", $itemimageandtext); //image and text into array
+                        $itemimage = $itemimageandtextarr[0];   //images
+                        $itemtext = '<span class="item_text_holder">'.substr($itemimageandtext, strpos($itemimageandtext, '<p')).'</span>';                        
+                    } else {
+                        $itemimage = $itemimageandtext;   //only images
+                        $itemtext = '<span class="item_text_holder" style="display:none;">Ingen beskrivelse</span>';                                               
+                    }
                     /* debug 
                         $content .= '<div class="twrss_bodytext motwrss_item_content">'.
                         ' itemtext:'.$itemtext.

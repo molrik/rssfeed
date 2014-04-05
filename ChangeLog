@@ -1,7 +1,8 @@
 (add new changes on top of this file)
 14-04-05 Mikkel Olrik <molrik@molrikdata.dk>
 
-	* 2.2.5 Modifications for WhatWeDo - 
+	* 2.2.6 Modifications for WhatWeDo - fixed fault when no text-description
+	* 2.2.5 Modifications for WhatWeDo - fixed fault when p-tags with attributes
 
 13-06-14 Mikkel Olrik <molrik@molrikdata.dk>
 
