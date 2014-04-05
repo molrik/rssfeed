@@ -327,9 +327,9 @@
                     $itemimageandtext = preg_replace("/\<br(\s*)?\/?\>/i","", $itemdescrall); // remove <br/> and <br />
                     //$itemimageandtext = preg_replace("/<br\/>/","", $itemdescrall); //old version
                     //$itemimageandtext = $itemdescrall;
-                    $itemimageandtextarr = preg_split("/<p>/", $itemimageandtext); //image and text into array
+                    $itemimageandtextarr = preg_split("/<p/", $itemimageandtext); //image and text into array
                     $itemimage = $itemimageandtextarr[0];   //images
-                    $itemtext = '<p>'.substr($itemimageandtext, strpos($itemimageandtext, '<p>'));
+                    $itemtext = '<span class="item_text_holder">'.substr($itemimageandtext, strpos($itemimageandtext, '<p')).'</span>';
                     /* debug 
                         $content .= '<div class="twrss_bodytext motwrss_item_content">'.
                         ' itemtext:'.$itemtext.
